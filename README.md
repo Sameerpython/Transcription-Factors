@@ -2,6 +2,6 @@ A python script for batch submission of transcription factor sequences for Infer
 
 Usage: jaspar.py <input.fasta> 
 
-Input: provide a fasta file with sequences
+Input: provide a FASTA file containing your sequences
 
 The output of analysis will be provided in a text file. 
