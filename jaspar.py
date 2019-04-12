@@ -57,7 +57,7 @@ with open(outputfilename1, 'a') as the_file:
         result1 = dictfilt(a, wanted_keys)
         data1=result1.get('results')
         for elements in data1:
-            the_file.write(line[0]+'\t')
+            the_file.write(line2[0]+'\t')
             for key1, value2 in elements.items():
                 the_file.write(str(value2)+'\t')
                 if key1 == 'sequence_logo':
