@@ -39,7 +39,7 @@ except ValueError:
         raise ValueError('check your sequence format')
     
 finally:
-    the_file.close()
+    
     print "Profile Inference Search Finished"
 
        
