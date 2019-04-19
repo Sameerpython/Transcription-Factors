@@ -32,8 +32,11 @@ try:
         data1= record.id + "#" + str(result)
         with open(outputfilename, 'a') as the_file:
             the_file.write(str(data1)+'\n')
-except:
-    print "Provide sequence file"
+except ValueError:
+    if not inputfile:
+        raise ValueError('No sequence file')
+    else:
+        raise ValueError('check your sequence format')
     
 finally:
     the_file.close()
