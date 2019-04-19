@@ -4,28 +4,25 @@ from coreapi import Client
 from Bio import SeqIO
 import sys
 import os
-
 from collections import OrderedDict
+from requests.exceptions import ConnectionError
 
-inputfile= open (sys.argv[1], 'r')
-
-# to get the last argument on command line
-filename = sys.argv[-1]
-
-client=Client()
-
-#outputfile name to store the results
-outputfilename=os.path.splitext(filename)[0] + '.txt'
-outputfilename1=os.path.splitext(filename)[0]+ 'finaltable' + '.txt'
-
-
-#Connecting to JASPAR
-document=client.get('http://jaspar.genereg.net/api/v1/docs/')
-
-#Provide sequence in fasta as input file
-
-print "Profile Inference Search Started....."
-for record in SeqIO.parse(inputfile, "fasta"):
+try:
+    inputfile= open (sys.argv[1], 'r')
+    # to get the last argument on command line
+    filename = sys.argv[-1]
+    #outputfile name to store the results
+    outputfilename=os.path.splitext(filename)[0] + '.txt'
+    outputfilename1=os.path.splitext(filename)[0]+ 'finaltable' + '.txt'
+    try:
+        #Connecting to JASPAR
+        client=Client()
+        document=client.get('http://jaspar.genereg.net/api/v1/docs/')
+    except ConnectionError as e:
+        print e
+        print "Database is not responding. Try again later. "
+    print "Profile Inference Search Started....."
+    for record in SeqIO.parse(inputfile, "fasta"):
         
         recordseq=record.seq
         
@@ -35,10 +32,12 @@ for record in SeqIO.parse(inputfile, "fasta"):
         data1= record.id + "#" + str(result)
         with open(outputfilename, 'a') as the_file:
             the_file.write(str(data1)+'\n')
-
-the_file.close()
- 
-print "Profile Inference Search Finished"
+except IndexError:
+    print "Provide sequence file"
+    
+finally:
+    the_file.close()
+    print "Profile Inference Search Finished"
 
        
 resultfinle=open(outputfilename, 'r')   
