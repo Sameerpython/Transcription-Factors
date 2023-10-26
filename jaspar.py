@@ -19,9 +19,9 @@ try:
         client=Client()
         document=client.get('http://jaspar.genereg.net/api/v1/docs/')
     except ConnectionError as e:
-        print e
-        print "Database is not responding. Try again later. "
-    print "Profile Inference Search Started....."
+        print (e)
+        print ("Database is not responding. Try again later. ")
+    print ("Profile Inference Search Started.....")
     for record in SeqIO.parse(inputfile, "fasta"):
         
         recordseq=record.seq
@@ -40,15 +40,15 @@ except ValueError:
     
 finally:
     
-    print "Profile Inference Search Finished"
+    print ("Profile Inference Search Finished")
 
        
 resultfinle=open(outputfilename, 'r')   
 
-print "Generating File....."
+print ("Generating File.....")
 
 with open(outputfilename1, 'a') as the_file:
-    the_file.write( "GeneID"+'\t'+ "Profile_Name"+'\t'+ "url"+'\t'+"Evalue" +'\t'+ "Matrix_id" +'\t'+ "dbd" +'\t'+ "sequence_logo" +'\n')
+    the_file.write( "GeneID"+'\t'+ "dbd"+'\t'+ "url"+'\t'+"Profile_Name" +'\t'+ " Evalue" +'\t'+ "dbd" +'\t'+ "Matrix_id" +'\t'+ "sequence_logo" +'\t' + "Logo_URL" +'\n')
     for line in resultfinle:
         line2=line.split('#')
         a = eval(line2[1], {'OrderedDict': OrderedDict})
