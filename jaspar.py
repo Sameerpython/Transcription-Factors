@@ -48,7 +48,7 @@ resultfinle=open(outputfilename, 'r')
 print ("Generating File.....")
 
 with open(outputfilename1, 'a') as the_file:
-    the_file.write( "GeneID"+'\t'+ "dbd"+'\t'+ "url"+'\t'+"Profile_Name" +'\t'+ " Evalue" +'\t'+ "dbd" +'\t'+ "Matrix_id" +'\t'+ "sequence_logo" +'\t' + "Logo_URL" +'\n')
+    the_file.write( "GeneID"+'\t'+ "Profile_name"+'\t'+ "TF_name"+'\t'+"Evalue" +'\t'+ " DBD" +'\t'+  "Matrix_url" +'\t'+ "Matrix_logo_url"  +'\n')
     for line in resultfinle:
         line2=line.split('#')
         a = eval(line2[1], {'OrderedDict': OrderedDict})
